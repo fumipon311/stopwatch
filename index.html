@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset='utf-8'>
+<title>Stopwatch</title>
+<link rel="stylesheet" href="https://fumipon311.github.io/stopwatch1/style.css"/type="text/css">
+</head>
+<body>
+  <h1>ストップウォッチ</h1>
+  <div id="container">
+    <div id="time">00:00:00</div>
+    <div id="buttons">
+      <input id="start" type="button" value="スタート">
+      <input id="stop" type="button" value="ストップ">
+      <input id="reset" type="button" value="リセット">
+    </div>
+  </div>  
+  <script>
+    const time = document.getElementById('time');
+const startButton = document.getElementById('start');
+const stopButton = document.getElementById('stop');
+const resetButton = document.getElementById('reset');
+
+// 開始時間
+let startTime;
+// 停止時間
+let stopTime = 0;
+// タイムアウトID
+let timeoutID;
+
+// 時間を表示する関数
+function displayTime() {
+  const currentTime = new Date(Date.now() - startTime + stopTime);
+  const m = String(currentTime.getMinutes()).padStart(2, '0');
+  const s = String(currentTime.getSeconds()).padStart(2, '0');
+  const ms = String(currentTime.getMilliseconds()).padStart(2, '0');
+
+  time.textContent = `${m}:${s}:${ms}`;
+  timeoutID = setTimeout(displayTime, 10);
+}
+
+startButton.addEventListener('click', () => {
+  startButton.disabled = true;
+  stopButton.disabled = false;
+  resetButton.disabled = true;
+  startTime = Date.now();
+  displayTime();
+});
+
+stopButton.addEventListener('click', function() {
+  startButton.disabled = false;
+  stopButton.disabled = true;
+  resetButton.disabled = false;
+  clearTimeout(timeoutID);
+  stopTime += (Date.now() - startTime);
+});
+
+resetButton.addEventListener('click', function() {
+  startButton.disabled = false;
+  stopButton.disabled = true;
+  resetButton.disabled = true;
+  time.textContent = '00:00.00';
+  stopTime = 0;
+});
+  </script>
+</body>
+</html>
