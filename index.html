@@ -10,10 +10,9 @@
     <div id="time">00:00:00</div>
     <div id="buttons">
       <input id="start" type="button" value="スタート">
-      <input id="stop" type="button" value="ストップ">
-      <input id="reset" type="button" value="リセット">
-      <button type="button" id="stop" disabled>ストップ</button>
-      <button type="button" id="reset" disabled>リセット</button>
+      <input id="stop" type="button" value="ストップ"  disabled>ストップ</button>
+      <input id="reset" type="button" value="リセット" disabled>リセット</button>
+     
     </div>
   </div>  
   <script>
@@ -37,7 +36,7 @@ function displayTime() {
   timeoutID = setTimeout(displayTime, 10);
 }
     
-startButton.addEventListener('mousedown', () => {
+startButton.addEventListener('click', () => {
   startButton.disabled = true;
   stopButton.disabled = false;
   resetButton.disabled = true;
@@ -45,7 +44,7 @@ startButton.addEventListener('mousedown', () => {
   displayTime();
 });
 
-stopButton.addEventListener('mousedown', function() {
+stopButton.addEventListener('click', function() {
   startButton.disabled = false;
   stopButton.disabled = true;
   resetButton.disabled = false;
@@ -53,7 +52,7 @@ stopButton.addEventListener('mousedown', function() {
   stopTime += (Date.now() - startTime);
 });
 
-resetButton.addEventListener('mousedown', function() {
+resetButton.addEventListener('click', function() {
   startButton.disabled = false;
   stopButton.disabled = true;
   resetButton.disabled = true;
